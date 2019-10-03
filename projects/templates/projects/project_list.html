@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block right_headers %}
+	<li><a href="https://mangoprism.com/author/mogryz/">Writing</a></li>
+	<li><a href="{% url 'photos' %}">Photos</a></li>
+	<li><a class="active" href="{% url 'projects' %}">Projects</a></li>
+{% endblock %}
+{% block content %}
+  <div class="project_list_container">
+    <div class="project_list">
+		{% for project in projects %}
+			<div class="project_container">
+				<h2 class="project_title"><a href="{% url 'project' slug=project.slug %}">{{ project.title }}</a></h2>
+				<a href="{% url 'project' slug=project.slug %}"><img id="{{ project.slug }}" src="{{ project.main_img.url }}"></img></a>
+			</div>
+		{% endfor %}
+    </div>
+  </div>
+{% endblock %}
+

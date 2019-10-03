@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block right_headers %}
+	<li><a href="https://mangoprism.com/author/mogryz/">Writing</a></li>
+	<li><a href="{% url 'photos' %}">Photos</a></li>
+	<li><a class="active" href="{% url 'projects' %}">Projects</a></li>
+{% endblock %}
+{% block content %}
+	<div class="project_list_container">
+		<div class="project_list">
+			<div class="project_description_container">
+				<div id="description" class="details">
+					<h2 class="project_detail_title">{{ project.title }}</h2>
+					<h4 class="project_description">
+						First the original jump is loaded:
+					</h4>
+						<img id="img1" src="{% static 'jump-data/russ_dunk_original.gif' %}"></img>
+					<h4 class="project_description">
+						Then, we use a popular instance segmentation algorithm called <a 
+						style="font-family: sans-serif;
+  						font-size: 16px;
+  						text-align: left;
+  						font-weight: normal;
+  						color: rgba(0,0,0,0.7);
+  						text-decoration: underline;" href="https://github.com/matterport/Mask_RCNN"> 
+  						Mask R-CNN</a> to find a binary mask of Russell Westbrook in each video frame:
+					</h4>
+						<img id="img1" src="{% static 'jump-data/masks.gif' %}"></img>
+					<h4 class="project_description">
+						Simultaneously, we stabilize the input video:
+					</h4>
+						<img id="img2" src="{% static 'jump-data/stabilized.gif' %}"></img>
+					<h4 class="project_description">
+						This, along with the binary masks, gives us a method of determining the Westbrook's trajectory over time. We plot the centroid height of each mask on the y-axis and time on the x-axis. Because the masks are never perfect, we can perform gaussian smoothing to get a more accurate trajectory:
+					</h4>
+						<img id="img3" src="{% static 'jump-data/plot.gif' %}"></img>
+					<h4 class="project_description">
+						To find the start and end frames of the jump, we use an algorithm called <a 
+						style="font-family: sans-serif;
+  						font-size: 16px;
+  						text-align: left;
+  						font-weight: normal;
+  						color: rgba(0,0,0,0.7);
+  						text-decoration: underline;" href="https://en.wikipedia.org/wiki/Random_sample_consensus">RANSAC</a>, which essentially finds the best parabolic fit to the movement trajectory we previously calculated. Here we are taking advantage of the fact that the jump trajectory will form a parabola as the force of gravity affects Westbrook. In the image below, the blue line is the previously calculated trajectory, and the orange line is the best fit parabola. We know the jump starts when the parabola starts intersecting with the trajectory, and ends when it stops:
+					</h4>
+						<img id="img4" src="{% static 'jump-data/RANSAC.png' %}"></img>
+
+					<h4 class="project_description">
+						We now have a parabola that represents our jump trajectory. In order to increase the jump height, all we have to do is increase the height of the parabola, and move each player mask to follow this new parabola. However, as we move Westbrook up, there will be empty pixels where he used to be. So the next challenge comes in filling these in. How can we possibly know what the world looks like behind Westbrook, when our video did not capture it?
+					</h4>
+					<h4 class="project_description">
+						Well, actually, the video did capture it, just in previous frames. Below is a photo of the median value for each pixel in the stabilized video. By selecting the median value of each pixel, we are essentially showing the entire scene without Westbrook in it, since Westbrook is moving and not present for enough time to make any of the median pixel values be him (this is actually not true for some pixels - as you can see there are some orange splotches where the median value picked up was a part of Westbrook's jersey):
+					</h4>
+						<img id="img5" src="{% static 'jump-data/median_img.png' %}"></img>
+					<h4 class="project_description">
+						We can then take pixel values from the photo above and place them in our final video, filling in those empty pixels mentioned before:
+					</h4>
+						<img id="img6" src="{{ project.main_img.url }}"></img>
+					<h4 class="project_description">
+						And we can make Westbrook jump as high as we want!
+					</h4>
+						<img id="img7" src="{{ project.image3.url }}"></img>
+					
+					<script>
+						img_width = document.getElementById("img1").width;
+						document.getElementById("description").style.width = img_width+"px";
+						document.getElementById("img2").style.width = img_width+"px";
+						document.getElementById("img2").style.height = "auto";
+						document.getElementById("img3").style.width = img_width+"px";
+						document.getElementById("img3").style.height = "auto";
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

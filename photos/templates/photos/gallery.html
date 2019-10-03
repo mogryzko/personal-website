@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block right_headers %}
+  <li><a href="https://mangoprism.com/author/mogryz/">Writing</a></li>
+  <li><a class="active" href="{% url 'photos' %}">Photos</a></li>
+  <li><a href="{% url 'projects' %}">Projects</a></li>
+{% endblock %}
+{% block content %}
+  <script>function clicked(container) {
+    if (container.style.height == 'auto') {
+      container.style.height = container.parentElement.style.height;
+    } else if (container.children[0].height > container.clientHeight){
+      container.style.height = 'auto';
+      container.style.border = 'none'
+    } 
+  }
+  </script>
+  <div class="gallery_container">
+    <div class="gallery_title">
+    Some of my favorite photos:
+    </div>
+    <div class="gallery">
+      {% for image in images %}
+        <div class="img_container" onclick="clicked(this)">
+          <img src="/static/photos/{{ image }}">
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

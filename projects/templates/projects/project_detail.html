@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block right_headers %}
+	<li><a href="https://mangoprism.com/author/mogryz/">Writing</a></li>
+	<li><a href="{% url 'photos' %}">Photos</a></li>
+	<li><a class="active" href="{% url 'projects' %}">Projects</a></li>
+{% endblock %}
+{% block content %}
+	<div class="project_list_container">
+		<div class="project_list">
+			<div class="project_description_container">
+				<div id="description" class="details">
+					<h2 class="project_detail_title">{{ project.title }}</h2>
+					<h4 class="project_description">{{ project.teaser }}</h4>
+					<h4 class="project_description">{{ project.description }}</h4>
+					{% if project.slug == "jump-exaggeration-app" %}
+						<h4 class="project_description">
+							<a style="font-family: sans-serif;
+  									  font-size: 16px;
+  									  text-align: left;
+  									  font-weight: normal;
+  									  color: rgba(0,0,0,0.7);
+  									  text-decoration: underline;" href="{% url 'jump_exaggeration_app_more_info' %}">
+								A detailed explaination
+							</a>
+						</h4>
+					{% endif %}
+					<img id="{{ project.slug }}" src="{{ project.main_img.url }}"></img>
+					{% if project.image2 %}
+						<img src="{{ project.image2.url }}"></img>
+					{% endif %}
+					{% if project.image3 %}
+						<img src="{{ project.image3.url }}"></img>
+					{% endif %}
+					{% if project.image4 %}
+						<img src="{{ project.image4.url }}"></img>
+					{% endif %}
+					{% if project.image5 %}
+						<img src="{{ project.image5.url }}"></img>
+					{% endif %}
+					<script>
+						img_width = document.getElementById("{{ project.slug }}").width;
+						document.getElementById("description").style.width = img_width+"px";
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
