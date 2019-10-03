@@ -184,7 +184,7 @@
   width: auto;
   min-width: 600px;
   height: auto;
-  overflow: hidden;
+
   border-radius: 4px;
   display: inline-block;
   clear:left;
@@ -195,9 +195,14 @@
 }
 .details img {
   width: auto;
-  height: 300px;
+  height: auto;
   border-radius: 4px;
   text-align: left;
+}
+
+#description,#img1,#img2,#img3,#img4,#img5,#img6,#img7,#img8 { 
+  width: 640px;
+  height: auto;
 }
 
 /* More info */
