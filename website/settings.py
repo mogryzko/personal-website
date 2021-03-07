@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'h0^oe#*#l6xid8)4@u%8bg!4py2jdv3%(iv9$=zs55%if89vjt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['165.227.96.224','maxogryzko.com', 'www.maxogryzko.com']
 
 
 # Application definition
@@ -122,9 +122,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'assets'),
+    os.path.join(BASE_DIR, 'assets/'),
     )
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+FILE_UPLOAD_PERMISSIONS=0o640
+FILE_UPLOAD_MAX_MEMORY_SIZE = 200000000
+
+

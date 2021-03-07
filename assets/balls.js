@@ -229,7 +229,8 @@ function Initialize(containerId) {
     balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n0', 'DimGray', Math.PI / Math.random()*3,50, "https://github.com/mogryzko/","https://cdn.freebiesupply.com/logos/large/2x/github-icon-logo-png-transparent.png"));
     balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n1', 'DimGray', Math.PI / Math.random()*3,50, "http://maxogryzko.com/Max_Ogryzko_Resume.pdf","https://cdn2.iconfinder.com/data/icons/project-management-16/48/30-512.png"));
     balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n2', 'DimGray', Math.PI / Math.random()*3,50, "https://www.linkedin.com/in/mogryzko/","https://www.pinclipart.com/picdir/big/221-2213428_other-linkedin-icon-png-transparent-background-images-instagram.png"));
-    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n3', 'DimGray', Math.PI / Math.random()*3,50, "mailto:m.ogryzko@columbia.com","https://www.pinclipart.com/picdir/big/123-1236933_envelope-message-send-mail-packet-letter-email-email.png"));
+    
+	balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n3', 'DimGray', Math.PI / Math.random()*3,50, "mailto:m.ogryzko@columbia.com","https://www.pinclipart.com/picdir/big/123-1236933_envelope-message-send-mail-packet-letter-email-email.png"));
     
 
     for (var i = 0; i < balls.length; ++i) {

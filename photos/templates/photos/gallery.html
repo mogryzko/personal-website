@@ -18,12 +18,18 @@
   </script>
   <div class="gallery_container">
     <div class="gallery_title">
-    Some of my favorite photos:
+    Photos from my phone that I don't know what to do with
+    </div>
+    <div class="gallery_title" style="font-size:18px;">
+    Click to expand
     </div>
     <div class="gallery">
       {% for image in images %}
         <div class="img_container" onclick="clicked(this)">
           <img src="/static/photos/{{ image }}">
+	<script>
+		console.log("{{ image }}");
+	</script>
         </div>
       {% endfor %}
     </div>
