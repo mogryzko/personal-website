@@ -58,41 +58,20 @@ function Ball(svg, x, y, id, color, aoa, weight, link, logo) {
         	.append("svg:image")
         	.attr("id", thisobj.id)
 			.attr("xlink:href", thisobj.logo)
-            //.style("fill", thisobj.color)
         ;
         
         ball
-            //.transition()//.duration(50)
             .attr("x", thisobj.posX - thisobj.radius)
         	.attr("y", thisobj.posY - thisobj.radius)
 			.attr('width', thisobj.radius*2)
 			.attr('height', thisobj.radius*2)
         ;
-		// Text
-        /*
-        var text = svg.selectAll('#' + thisobj.textid)
-                    .data(thisobj.textdata)
-        ;
-        svg.select("#"+thisobj.textid).remove();
-        svg
-        	.append("svg:text")
-        	.attr("x", thisobj.posX)
-        	.attr("y", thisobj.posY)
-        	.attr("id", thisobj.textid)
-        	.attr("text-anchor", "middle")
-            .text(function(d){return "Resume"})
-            .style("fill", "black")
-        ;
-        */
 
         
     }
     
     this.Move = function () {
         var svg = thisobj.svg;
-
-        //thisobj.posX += Math.cos(thisobj.aoa) * thisobj.jumpSize;
-        //thisobj.posY += Math.sin(thisobj.aoa) * thisobj.jumpSize;
 
         thisobj.posX += thisobj.vx;
         thisobj.posY += thisobj.vy;
@@ -227,9 +206,8 @@ function Initialize(containerId) {
     ;
     
     balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n0', 'DimGray', Math.PI / Math.random()*3,50, "https://github.com/mogryzko/","https://cdn.freebiesupply.com/logos/large/2x/github-icon-logo-png-transparent.png"));
-    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n1', 'DimGray', Math.PI / Math.random()*3,50, "http://maxogryzko.com/Max_Ogryzko_Resume.pdf","https://cdn2.iconfinder.com/data/icons/project-management-16/48/30-512.png"));
+    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n1', 'DimGray', Math.PI / Math.random()*3,50, "http://maxogryzko.com/static/Max_Ogryzko_Resume.pdf","https://cdn2.iconfinder.com/data/icons/project-management-16/48/30-512.png"));
     balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n2', 'DimGray', Math.PI / Math.random()*3,50, "https://www.linkedin.com/in/mogryzko/","https://www.pinclipart.com/picdir/big/221-2213428_other-linkedin-icon-png-transparent-background-images-instagram.png"));
-    
 	balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n3', 'DimGray', Math.PI / Math.random()*3,50, "mailto:m.ogryzko@columbia.com","https://www.pinclipart.com/picdir/big/123-1236933_envelope-message-send-mail-packet-letter-email-email.png"));
     
 

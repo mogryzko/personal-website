@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'h0^oe#*#l6xid8)4@u%8bg!4py2jdv3%(iv9$=zs55%if89vjt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['165.227.96.224','maxogryzko.com', 'www.maxogryzko.com']
+ALLOWED_HOSTS = ['165.227.96.224','maxogryzko.com', 'www.maxogryzko.com', "127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -123,6 +123,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets/'),
+    os.path.join(BASE_DIR, 'static/')
     )
 
 MEDIA_URL = '/media/'

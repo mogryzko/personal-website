@@ -1,2 +1,3 @@
 */assets/photos/*
-websiteenv/*
+*.DS_STORE
+*__pycache__*
