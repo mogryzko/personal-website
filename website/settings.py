@@ -31,7 +31,6 @@ ALLOWED_HOSTS = ['165.227.96.224','maxogryzko.com', 'www.maxogryzko.com', "127.0
 # Application definition
 
 INSTALLED_APPS = [
-    # 'django.contrib.admin',  # preventing the need for a database so I can deploy to vercel
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -40,6 +39,10 @@ INSTALLED_APPS = [
     'projects',
     'photos',
 ]
+
+#  preventing the need for a database so I can deploy to vercel
+if os.getenv("ENV") != "production":
+    INSTALLED_APPS.append("django.contrib.admin")
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
