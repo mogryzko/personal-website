@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['165.227.96.224','maxogryzko.com', 'www.maxogryzko.com', "127.0
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',  # preventing the need for a database so I can deploy to vercel
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -76,9 +76,8 @@ WSGI_APPLICATION = 'website.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.dummy"  # preventing the need for a database so I can deploy to vercel
     }
 }
 
@@ -120,6 +119,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets/'),

@@ -1,0 +1,216 @@
+/* Variables */
+
+:root {
+  --top-border: 100px;
+}
+.background-img {
+  height: 100%;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  z-index: 0;
+}
+.background-img::after {
+  background: url('https://cdn.cnn.com/cnnnext/dam/assets/170612142756-02-best-of-iceland.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  content: "";
+  opacity: 0.5;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;   
+}
+#chart {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+}
+.header {
+  position: relative;
+  top: 30px;
+  left: 0px;
+  width: 98%;
+  z-index: 10;
+}
+.header ul {
+  list-style-type: none;
+  overflow: hidden;
+}
+.header li {
+  float: right;
+}
+.header li.name {
+  float: left;
+}
+.header a {
+  font-family: sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+  color: rgb(0, 0, 0);
+  padding: 12px;
+  text-decoration: none;
+}
+.header a.name {
+  font-weight: bold;
+}
+.header a.name:hover {
+  color: black;
+}
+.header a:hover { 
+  color: rgba(23, 147, 200, 0.5); 
+}
+.header a.active {
+  color: rgba(23, 147, 200, 0.5);
+}
+
+
+
+
+
+/* Gallery */
+
+.gallery_container {
+  text-align: center;
+  padding-top: var(--top-border);
+  padding-bottom: 20px;
+}
+.gallery {
+  border-radius: 4px;
+  display: inline-block;
+  width: 200vh;
+  height: auto;
+}
+.gallery_title {
+  text-align: left;
+  font-family: sans-serif;
+  font-weight: normal;
+  color: rgba(0,0,0,1);
+  font-size: 24px;
+  padding-left: 30px;
+  padding-bottom: 10px;
+}
+.img_container {
+  width: 33%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 4px;
+  display: inline-block;
+}
+.img_container img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+
+
+/* Projects */
+
+.project_list_container {
+  text-align: center;
+  padding-top: var(--top-border);
+  padding-bottom: 20px
+}
+.project_list {
+  border-radius: 4px;
+  display: inline-block;
+  width: 200vh;
+  height: auto;
+}
+.project_container {
+  width: 40%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 4px;
+  display: inline-block;
+  clear:left;
+  padding-bottom: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.project_container img {
+  width: auto;
+  height: 350px;
+  border-radius: 4px;
+  text-align: left;
+}
+.project_title {
+  text-align: center;
+}
+.project_title a {
+  text-decoration: none;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  color: rgba(0,0,0,1);
+}
+
+
+
+
+/* Project Detail */
+
+.project_detail_container {
+  text-align: center;
+  padding-top: var(--top-border);
+}
+.project_detail {
+  border-radius: 4px;
+  display: inline-block;
+  width: 200vh;
+  height: auto;
+}
+.project_detail_title {
+  text-align: center;
+  text-decoration: none;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 26px;
+  color: rgba(0,0,0,1);
+}
+.project_description {
+  font-family: sans-serif;
+  font-size: 16px;
+  text-align: left;
+  font-weight: normal;
+  color: rgba(0,0,0,0.7);
+}
+.details {
+  width: auto;
+  min-width: 600px;
+  height: auto;
+  overflow: hidden;
+  border-radius: 4px;
+  display: inline-block;
+  clear:left;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: rgba(255,255,255,0.9);
+}
+.details img {
+  width: auto;
+  height: 300px;
+  border-radius: 4px;
+  text-align: left;
+}
+
+/* More info */
+
+.more_info_links {
+  font-family: sans-serif;
+  font-size: 16px;
+  text-align: left;
+  font-weight: normal;
+  color: rgba(0,0,0,0.7);
+  text-decoration: underline;
+}
+
+
+  
+
