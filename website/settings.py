@@ -138,3 +138,50 @@ FILE_UPLOAD_PERMISSIONS=0o640
 FILE_UPLOAD_MAX_MEMORY_SIZE = 200000000
 
 
+
+STATIC_PROJECTS = [
+    {
+        "title": "Building Recognition App",
+        "main_img": {"url": "/media/building1_Tlgju4f.png"},
+        "image2": {"url": "/media/building2.png"},
+        "image3": {"url": "/media/building3.png"},
+        "image4": None,
+        "slug": "building-recognition-app",
+        "teaser": "A smartphone application that recognizes and overlays the outline of any NYC building on the user's camera screen using only smartphone data and a 3D point cloud of NYC.",
+        "description": "The app converts the smartphone's GPS location and accelerometer data into a point cloud location and direction. Then, camera intrinsics and alignment techniques are used to find which points belong to the building in the center of the user view. Those points are converted into their locations in the user view and overlayed over the camera image.",
+        "date": "2019-10-02 00:26:15"
+    },
+    {
+        "title": "Deep Learning Based Wind Speed Simulation",
+        "main_img": {"url": "/media/kpf_gif.gif"},
+        "image2": None,
+        "image3": None,
+        "image4": None,
+        "slug": "wind-speed-simulation",
+        "teaser": "A 3D modeling software plugin that provides wind speed estimates for architectural workflows. Created during my internship at KPFui.",
+        "description": "A grasshopper plugin for a 3D modeling software called Rhino. The plugin sends an image of the current building geometry to a deep learning model hosted on AWS. The model returns back an image with a wind speed value at each pixel, coded from red (0 m/s) to green (120m/s). The example below has wind coming from the bottom of the screen. The current model's average error is <1m/s. Results would take 30+ minutes with a physics engine, but here each request takes <1 second!",
+        "date": "2019-10-02 01:27:24"
+    },
+    {
+        "title": "Jump Exaggeration App",
+        "main_img": {"url": "/media/IMG_5729.gif"},
+        "image2": {"url": "/media/blake_dunk.GIF"},
+        "image3": {"url": "/media/final.gif"},
+        "image4": None,
+        "slug": "jump-exaggeration-app",
+        "teaser": "Load in a video of a jump and autonomously exaggerate the jump vertical as much as you'd like",
+        "description": "",
+        "date": "2019-10-02 01:30:27"
+    },
+    {
+        "title": "AI NBA Player",
+        "main_img": {"url": "/media/nba_ai1crop.gif"},
+        "image2": {"url": "/media/ai_gif2.gif"},
+        "image3": None,
+        "image4": None,
+        "slug": "basketball-game",
+        "teaser": "An attempt to make my favorite NBA players play against me.",
+        "description": "Inspired by a paper titled: \"Bhostgusters: Realtime Interactive Play Sketching with Synthesized NBA Defenses.\" Using tracking data from the 2015-16 NBA season, I created an algorithm that finds when a player I specify is guarding a ball-handler. I then used these instances to train a Long Short Term Memory (LSTM) neural network to imitate the player as a \"ghost\" defender.\r\n\r\nBelow you see two real possessions from the 2015-16 NBA season. The ball handler is the black dot, real-Al Horford is the gold dot, and LSTM-Al Horford is the red dot.",
+        "date": "2019-10-02 01:43:23"
+    }
+]
