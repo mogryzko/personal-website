@@ -6,5 +6,8 @@
         { "src": "/static/(.*)", "dest": "/static/$1" },
         { "src": "/media/(.*)", "dest": "/media/$1" },
         { "src": "/(.*)", "dest": "website/wsgi.py" }
-    ]
+    ],
+    "env": {
+        "VERCEL": "1"
+    }
 }
