@@ -1,13 +1,39 @@
 {
+    "version": 2,
     "builds": [
-        { "src": "website/wsgi.py", "use": "@vercel/python" }
+        {
+            "src": "website/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.9"
+            }
+        },
+        {
+            "src": "static/**",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "media/**",
+            "use": "@vercel/static"
+        }
     ],
     "routes": [
-        { "src": "/static/(.*)", "dest": "/static/$1" },
-        { "src": "/media/(.*)", "dest": "/media/$1" },
-        { "src": "/(.*)", "dest": "website/wsgi.py" }
+        {
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": "/media/(.*)",
+            "dest": "/media/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "website/wsgi.py"
+        }
     ],
     "env": {
         "VERCEL": "1"
-    }
+    },
+    "buildCommand": "chmod +x build.sh && ./build.sh"
 }
