@@ -124,10 +124,25 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'assets/'),
-    os.path.join(BASE_DIR, 'static/')
+# Add Vercel-specific configuration
+if os.getenv("VERCEL"):
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+        os.path.join(BASE_DIR, 'assets'),
+    ]
+else:
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'assets/'),
+        os.path.join(BASE_DIR, 'static/')
     )
+    
+# For Vercel deployment
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Add WhiteNoise middleware for static files
+if os.getenv("VERCEL"):
+    # Insert WhiteNoise middleware right after SecurityMiddleware
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 MEDIA_URL = '/media/'
 
