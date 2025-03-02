@@ -129,13 +129,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 if os.getenv("VERCEL"):
     STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'static'),
-        os.path.join(BASE_DIR, 'assets'),
     ]
 else:
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'assets/'),
-        os.path.join(BASE_DIR, 'static/')
-    )
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static/'),
+    ]
     
 # For Vercel deployment
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -161,12 +159,12 @@ STATIC_PROJECTS = [
         "main_img": {"url": "/media/building1_iphone.png"},
         "image2": {"url": "/media/building2_iphone.png"},
         "image3": {"url": "/media/building3_iphone.png"},
-        "image4": None,
         "slug": "building-recognition-app",
-        "teaser": "A smartphone application that recognizes and overlays the outline of any NYC building on the user's camera screen using only smartphone data and a 3D point cloud of NYC.",
-        "description": "The app converts the smartphone's GPS location and accelerometer data into a point cloud location and direction. Then, camera intrinsics and alignment techniques are used to find which points belong to the building in the center of the user view. Those points are converted into their locations in the user view and overlayed over the camera image.",
+        "description": "This app leverages mobile phone GPS, accelerometer, and camera intrinsics to localize the user's view within a <a href='http://maps.nyc.gov/download/3dmodel/DA_WISE_GML.zip'>3D point cloud</a> of NYC. It identifies buildings in the field of view, projects their structures onto the camera feed, and renders real-time overlays. The system operates without external servers, using efficient spatial alignment techniques.",
         "github": "https://github.com/roop-pal/nyc-visual-building-annotator",
-        "date": "2019-10-02 00:26:15"
+        "date": "2019-10-02",
+        "skills": ["Computer Vision", "3D Reconstruction", "Sensor Fusion"],
+        "tools": ["OpenCV", "Python"]
     },
     {
         "title": "Deep Learning Based Wind Speed Simulation",
