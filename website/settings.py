@@ -28,8 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['maxogryzko.dev', 'www.maxogryzko.dev', ".vercel.app"]
 
 #  preventing the need for a database so I can deploy to vercel
-if os.getenv("ENV") != "production":
-    ALLOWED_HOSTS.append("127.0.0.1", "localhost")
+if not os.getenv("VERCEL"):
+    ALLOWED_HOSTS += ["127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 ]
 
 #  preventing the need for a database so I can deploy to vercel
-if os.getenv("ENV") != "production":
+if not os.getenv("VERCEL"):
     INSTALLED_APPS.append("django.contrib.admin")
 
 MIDDLEWARE = [
