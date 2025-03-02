@@ -13,7 +13,6 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'website.settings')
 
-print("Environment variables:", os.environ)
 application = get_wsgi_application()
 
 app = application  # Vercel looks for 'app' or 'handler'
