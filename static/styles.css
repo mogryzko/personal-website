@@ -11,7 +11,7 @@
   z-index: 0;
 }
 .background-img::after {
-  background: url('https://cdn.cnn.com/cnnnext/dam/assets/170612142756-02-best-of-iceland.jpg');
+  background: url('/static/background.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   content: "";
@@ -177,6 +177,10 @@
   text-align: left;
   font-weight: normal;
   color: rgba(0,0,0,0.7);
+}
+.project_description a {
+  color: rgba(23, 147, 200, 0.5);
+  text-decoration: none;
 }
 .details {
   width: auto;

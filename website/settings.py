@@ -160,8 +160,8 @@ STATIC_PROJECTS = [
         "image2": {"url": "/media/building2_iphone.png"},
         "image3": {"url": "/media/building3_iphone.png"},
         "slug": "building-recognition-app",
-        "description": "This app leverages mobile phone GPS, accelerometer, and camera intrinsics to localize the user's view within a <a href='http://maps.nyc.gov/download/3dmodel/DA_WISE_GML.zip'>3D point cloud</a> of NYC. It identifies buildings in the field of view, projects their structures onto the camera feed, and renders real-time overlays. The system operates without external servers, using efficient spatial alignment techniques.",
-        "github": "https://github.com/roop-pal/nyc-visual-building-annotator",
+        "teaser": "We leverage GPS, accelerometer, and barometer data to localize the user's location and orientation within a <a href='http://maps.nyc.gov/download/3dmodel/DA_WISE_GML.zip' target='_blank'>3D point cloud</a> of NYC. We then identify buildings in their live camera feed and provide relevant information.",
+        "github": "<a href='https://github.com/roop-pal/nyc-visual-building-annotator' target='_blank'>Github</a>",
         "date": "2019-10-02",
         "skills": ["Computer Vision", "3D Reconstruction", "Sensor Fusion"],
         "tools": ["OpenCV", "Python"]
