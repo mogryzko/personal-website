@@ -55,6 +55,7 @@ function Ball(svg, x, y, id, color, aoa, weight, link, logo) {
         ball.enter()
         	.append("a")
     		.attr("xlink:href", thisobj.link)
+            .attr("target", "_blank") // Open link in a new tab
         	.append("svg:image")
         	.attr("id", thisobj.id)
 			.attr("xlink:href", thisobj.logo)
