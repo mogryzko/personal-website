@@ -35,6 +35,7 @@ if not os.getenv("VERCEL"):
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -43,10 +44,6 @@ INSTALLED_APPS = [
     'projects',
     'photos',
 ]
-
-#  preventing the need for a database so I can deploy to vercel
-if not os.getenv("VERCEL"):
-    INSTALLED_APPS.append("django.contrib.admin")
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
