@@ -25,18 +25,18 @@
 							</a>
 						</h4>
 					{% endif %}
-					<img id="{{ project.slug }}" src="{{ project.main_img.url }}"></img>
+					<img id="{{ project.slug }}" src="{{ project.main_img.url }}" style="padding: 0 20px;"></img>
 					{% if project.image2 %}
-						<img src="{{ project.image2.url }}"></img>
+						<img src="{{ project.image2.url }}" style="padding: 0 20px;"></img>
 					{% endif %}
 					{% if project.image3 %}
-						<img src="{{ project.image3.url }}"></img>
+						<img src="{{ project.image3.url }}" style="padding: 0 20px;"></img>
 					{% endif %}
 					{% if project.image4 %}
-						<img src="{{ project.image4.url }}"></img>
+						<img src="{{ project.image4.url }}" style="padding: 0 20px;"></img>
 					{% endif %}
 					{% if project.image5 %}
-						<img src="{{ project.image5.url }}"></img>
+						<img src="{{ project.image5.url }}" style="padding: 0 20px;"></img>
 					{% endif %}
 					<script>
 						img_width = document.getElementById("{{ project.slug }}").width;

@@ -158,13 +158,14 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 200000000
 STATIC_PROJECTS = [
     {
         "title": "Building Recognition App",
-        "main_img": {"url": "/media/building1_Tlgju4f.png"},
-        "image2": {"url": "/media/building2.png"},
-        "image3": {"url": "/media/building3.png"},
+        "main_img": {"url": "/media/building1_iphone.png"},
+        "image2": {"url": "/media/building2_iphone.png"},
+        "image3": {"url": "/media/building3_iphone.png"},
         "image4": None,
         "slug": "building-recognition-app",
         "teaser": "A smartphone application that recognizes and overlays the outline of any NYC building on the user's camera screen using only smartphone data and a 3D point cloud of NYC.",
         "description": "The app converts the smartphone's GPS location and accelerometer data into a point cloud location and direction. Then, camera intrinsics and alignment techniques are used to find which points belong to the building in the center of the user view. Those points are converted into their locations in the user view and overlayed over the camera image.",
+        "github": "https://github.com/roop-pal/nyc-visual-building-annotator",
         "date": "2019-10-02 00:26:15"
     },
     {

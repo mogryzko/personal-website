@@ -43,7 +43,7 @@
   						color: rgba(0,0,0,0.7);
   						text-decoration: underline;" href="https://en.wikipedia.org/wiki/Random_sample_consensus">RANSAC</a>, which essentially finds the best parabolic fit to the movement trajectory we previously calculated. Here we are taking advantage of the fact that the jump trajectory will form a parabola as the force of gravity affects Westbrook. In the image below, the blue line is the previously calculated trajectory, and the orange line is the best fit parabola. We know the jump starts when the parabola starts intersecting with the trajectory, and ends when it stops:
 					</h4>
-						<img style="width:300px;" id="img5" src="{% static 'jump-data/RANSAC.png' %}"></img>
+						<img style="width:300px;" id="img5" src="{% static 'jump-data/RANSAC.jpg' %}"></img>
 
 					<h4 class="project_description">
 						We now have a parabola that represents our jump trajectory. In order to increase the jump height, all we have to do is increase the height of the parabola, and move each player mask to follow this new parabola. However, as we move Westbrook up, there will be empty pixels where he used to be. So the next challenge comes in filling these in. How can we possibly know what the world looks like behind Westbrook, when our video did not capture it?
@@ -51,7 +51,7 @@
 					<h4 class="project_description">
 						Well, actually, the video did capture it, just in previous frames. Below is a photo of the median value for each pixel in the stabilized video. By selecting the median value of each pixel, we are essentially showing the entire scene without Westbrook in it, since Westbrook is moving and not present for enough time to make any of the median pixel values be him (this is actually not true for some pixels - as you can see there are some orange splotches where the median value picked up was a part of Westbrook's jersey):
 					</h4>
-						<img id="img6" src="{% static 'jump-data/median_img.png' %}"></img>
+						<img id="img6" src="{% static 'jump-data/median_img.jpg' %}"></img>
 					<h4 class="project_description">
 						We can then take pixel values from the photo above and place them in our final video, filling in those empty pixels mentioned before:
 					</h4>
