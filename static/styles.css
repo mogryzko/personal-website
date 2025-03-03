@@ -247,14 +247,14 @@
   color: rgba(0,0,0,1);
 }
 .project_description {
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 16px;
   text-align: left;
   font-weight: normal;
   color: rgba(0,0,0,0.7);
 }
 .project_description a {
-  color: rgba(23, 147, 200, 0.5);
+  color: #4181c4;
   text-decoration: none;
 }
 .details {
@@ -262,13 +262,13 @@
   min-width: 600px;
   height: auto;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 8px;
   display: inline-block;
   clear:left;
   padding-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
-  background-color: rgba(255,255,255,0.9);
+  background-color: rgba(255,255,255,0.8);
 }
 .details img {
   width: auto;

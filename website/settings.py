@@ -155,29 +155,6 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 200000000
 
 STATIC_PROJECTS = [
     {
-        "title": "Building Recognition App",
-        "main_img": {"url": "/media/building1_iphone.png"},
-        "image2": {"url": "/media/building2_iphone.png"},
-        "image3": {"url": "/media/building3_iphone.png"},
-        "slug": "building-recognition-app",
-        "teaser": "We leverage GPS, accelerometer, and barometer data to localize the user's location and orientation within a <a href='http://maps.nyc.gov/download/3dmodel/DA_WISE_GML.zip' target='_blank'>3D point cloud</a> of NYC. We then identify buildings in their live camera feed and provide relevant information.",
-        "github": "https://github.com/roop-pal/nyc-visual-building-annotator",
-        "date": "2019-10-02",
-        "skills": ["Computer Vision", "3D Reconstruction", "Sensor Fusion"],
-        "tools": ["OpenCV", "Python"]
-    },
-    {
-        "title": "Deep Learning Based Wind Speed Simulation",
-        "main_img": {"url": "/media/kpf_gif.gif"},
-        "image2": None,
-        "image3": None,
-        "image4": None,
-        "slug": "wind-speed-simulation",
-        "teaser": "A 3D modeling software plugin that provides wind speed estimates for architectural workflows. Created during my internship at KPFui.",
-        "description": "A grasshopper plugin for a 3D modeling software called Rhino. The plugin sends an image of the current building geometry to a deep learning model hosted on AWS. The model returns back an image with a wind speed value at each pixel, coded from red (0 m/s) to green (120m/s). The example below has wind coming from the bottom of the screen. The current model's average error is <1m/s. Results would take 30+ minutes with a physics engine, but here each request takes <1 second!",
-        "date": "2019-10-02 01:27:24"
-    },
-    {
         "title": "Jump Exaggeration App",
         "main_img": {"url": "/media/IMG_5729.gif"},
         "image2": {"url": "/media/blake_dunk.GIF"},
@@ -187,6 +164,31 @@ STATIC_PROJECTS = [
         "teaser": "Load in a video of a jump and autonomously exaggerate the jump vertical as much as you'd like",
         "description": "",
         "date": "2019-10-02 01:30:27"
+    },
+    {
+        "title": "Deep Learning Based Wind Speed Simulation",
+        "main_img": {"url": "/media/kpf_gif.gif"},
+        "image2": None,
+        "image3": None,
+        "image4": None,
+        "slug": "wind-speed-simulation",
+        "teaser": "My work as an intern at <a href='https://ui.kpf.com/smarter-city' target='_blank'>KPFui</a> was featured by KPF at the <a href='https://www.nvidia.com/en-us/on-demand/session/gtcsj20-s21493/' target='_blank'>NVIDIA GTC 2020</a> conference.",
+        "description": "I finetuned the <a href='https://github.com/phillipi/pix2pix' target='_blank'>pix2pix</a> GAN on a custom dataset of building facades and created an api on AWS Sagemaker that is then used in a <a href='https://www.grasshopper3d.com/' target='_blank'>Grasshopper</a> plugin. The model returns back an image with a wind speed value at each pixel, coded from red (0 m/s) to green (120m/s).",
+        "date": "2019-10-02 01:27:24",
+        "skills": "Deep Learning, Computer Vision, AWS",
+        "tools": "Python, Pytorch, OpenCV"
+    },
+    {
+        "title": "Building Recognition App",
+        "main_img": {"url": "/media/building1_iphone.png"},
+        "image2": {"url": "/media/building2_iphone.png"},
+        "image3": {"url": "/media/building3_iphone.png"},
+        "slug": "building-recognition-app",
+        "teaser": "We leverage GPS, accelerometer, and barometer data to localize the user's location and orientation within a <a href='http://maps.nyc.gov/download/3dmodel/DA_WISE_GML.zip' target='_blank'>3D point cloud</a> of NYC. We then identify buildings in their live camera feed and provide relevant information.",
+        "github": "https://github.com/roop-pal/nyc-visual-building-annotator",
+        "date": "2019-10-02",
+        "skills": "Computer Vision, 3D Reconstruction",
+        "tools": "OpenCV, Python"
     },
     {
         "title": "AI NBA Player",

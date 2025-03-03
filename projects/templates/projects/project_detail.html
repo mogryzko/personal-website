@@ -25,6 +25,12 @@
 							</a>
 						</h4>
 					{% endif %}
+					{% if project.skills %}
+						<h4  class="project_description">Skills: {{ project.skills }}</h4>
+					{% endif %}
+					{% if project.tools %}
+						<h4  class="project_description">Tools: {{ project.tools }}</h4>
+					{% endif %}
 					<img id="{{ project.slug }}" src="{{ project.main_img.url }}" style="padding: 0 20px;"></img>
 					{% if project.image2 %}
 						<img src="{{ project.image2.url }}" style="padding: 0 20px;"></img>
