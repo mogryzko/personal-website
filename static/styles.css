@@ -11,7 +11,7 @@
   z-index: 0;
 }
 .background-img::after {
-  background: url('https://cdn.cnn.com/cnnnext/dam/assets/170612142756-02-best-of-iceland.jpg');
+  background: url('/static/background.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   content: "";
@@ -82,7 +82,7 @@
 .gallery {
   border-radius: 4px;
   display: inline-block;
-  width: 200vh;
+  width: 95%;
   height: auto;
 }
 .gallery_title {
@@ -100,11 +100,55 @@
   overflow: hidden;
   border-radius: 4px;
   display: inline-block;
+  padding: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 .img_container img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   border-radius: 4px;
+}
+
+.img_container.expanded {
+  width: 33%;  /* Keep the same width as non-expanded state */
+  height: auto;
+  position: relative;
+  z-index: 100;
+}
+
+.img_container.expanded img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Media queries for responsive design */
+@media screen and (max-width: 768px) {
+  .img_container {
+    width: 50%;
+    height: 200px;
+  }
+  .gallery_title {
+    font-size: 20px;
+    padding-left: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .img_container {
+    width: 100%;
+    height: 180px;
+  }
+  .gallery {
+    width: 100%;
+  }
+  .gallery_title {
+    font-size: 18px;
+    padding-left: 10px;
+  }
 }
 
 
@@ -114,28 +158,31 @@
 .project_list_container {
   text-align: center;
   padding-top: var(--top-border);
-  padding-bottom: 20px
+  padding-bottom: 20px;
 }
 .project_list {
   border-radius: 4px;
   display: inline-block;
-  width: 200vh;
+  width: 95%;
   height: auto;
 }
 .project_container {
   width: 40%;
-  height: 400px;
+  height: auto;
+  min-height: 300px;
   overflow: hidden;
   border-radius: 4px;
   display: inline-block;
-  clear:left;
+  clear: left;
   padding-bottom: 50px;
   padding-left: 50px;
   padding-right: 50px;
+  box-sizing: border-box;
 }
 .project_container img {
-  width: auto;
-  height: 350px;
+  width: 100%;
+  max-height: 350px;
+  object-fit: contain;
   border-radius: 4px;
   text-align: left;
 }
@@ -148,6 +195,34 @@
   font-weight: bold;
   font-size: 20px;
   color: rgba(0,0,0,1);
+}
+
+/* Media queries for responsive projects */
+@media screen and (max-width: 768px) {
+  .project_container {
+    width: 90%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 30px;
+  }
+  .project_title a {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .project_container {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+  }
+  .project_container img {
+    max-height: 250px;
+  }
+  .project_title a {
+    font-size: 16px;
+  }
 }
 
 
@@ -178,6 +253,10 @@
   font-weight: normal;
   color: rgba(0,0,0,0.7);
 }
+.project_description a {
+  color: rgba(23, 147, 200, 0.5);
+  text-decoration: none;
+}
 .details {
   width: auto;
   min-width: 600px;
@@ -200,6 +279,20 @@
 #description,#img1,#img2,#img3,#img4,#img5,#img6,#img7,#img8 {
   width: 640px;
   height: auto;
+}
+
+.github-icon {
+  display: inline-block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.github-icon svg {
+  fill: #181717; /* GitHub's official color */
+}
+
+.github-icon:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
 }
 
 /* More info */
