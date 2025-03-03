@@ -177,8 +177,11 @@ function Initialize(containerId) {
     gTopGroupId = containerId + '_topGroup';
     var svg = d3.select("#" + containerId).append("svg")
         .attr("id", gCanvasId)
-        .attr("width", width)
-        .attr("height", height)
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .style("position", "absolute")
+        .style("top", 0)
+        .style("left", 0)
         .append("g")
         .attr("id", gTopGroupId)
         .attr("x", 0)
