@@ -206,6 +206,20 @@
   height: auto;
 }
 
+.github-icon {
+  display: inline-block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.github-icon svg {
+  fill: #181717; /* GitHub's official color */
+}
+
+.github-icon:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
 /* More info */
 
 .more_info_links {
