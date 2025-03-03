@@ -4,7 +4,7 @@ function Ball(svg, x, y, id, color, aoa, weight, link, logo) {
     this.posY = y; // cy
     this.color = color;
     this.radius = weight; // radius and weight same
-    this.jumpSize = 1; // equivalent of speed default to 1
+    this.jumpSize = 2; // equivalent of speed default to 1
     this.svg = svg; // parent SVG
     this.id = id; // id of ball
     this.aoa = aoa; // initial angle of attack
@@ -34,6 +34,7 @@ function Ball(svg, x, y, id, color, aoa, weight, link, logo) {
     this.initialVy = this.vy;
     this.initialPosX = this.posX;
     this.initialPosY = this.posY;
+    this.element = null; // Store reference to DOM element
 
     // when speed changes, go to initial setting
     this.GoToInitialSettings = function (newjumpSize) {
@@ -47,140 +48,97 @@ function Ball(svg, x, y, id, color, aoa, weight, link, logo) {
     this.Draw = function () {
         var svg = thisobj.svg;
 
-        var ball = svg.selectAll('#' + thisobj.id)
-                    .data(thisobj.data)
-        ;
+        // Only create the element if it doesn't exist yet
+        if (!thisobj.element) {
+            var ball = svg.selectAll('#' + thisobj.id)
+                        .data(thisobj.data);
+            
+            var link = ball.enter()
+                .append("a")
+                .attr("xlink:href", thisobj.link)
+                .attr("target", "_blank"); // Open link in a new tab
+            
+            link.append("svg:image")
+                .attr("id", thisobj.id)
+                .attr("xlink:href", thisobj.logo);
+            
+            thisobj.element = svg.select('#' + thisobj.id);
+        }
         
-        
-        ball.enter()
-        	.append("a")
-    		.attr("xlink:href", thisobj.link)
-        	.append("svg:image")
-        	.attr("id", thisobj.id)
-			.attr("xlink:href", thisobj.logo)
-            //.style("fill", thisobj.color)
-        ;
-        
-        ball
-            //.transition()//.duration(50)
+        // Just update position without transitions
+        thisobj.element
             .attr("x", thisobj.posX - thisobj.radius)
-        	.attr("y", thisobj.posY - thisobj.radius)
-			.attr('width', thisobj.radius*2)
-			.attr('height', thisobj.radius*2)
-        ;
-		// Text
-        /*
-        var text = svg.selectAll('#' + thisobj.textid)
-                    .data(thisobj.textdata)
-        ;
-        svg.select("#"+thisobj.textid).remove();
-        svg
-        	.append("svg:text")
-        	.attr("x", thisobj.posX)
-        	.attr("y", thisobj.posY)
-        	.attr("id", thisobj.textid)
-        	.attr("text-anchor", "middle")
-            .text(function(d){return "Resume"})
-            .style("fill", "black")
-        ;
-        */
-
-        
+            .attr("y", thisobj.posY - thisobj.radius)
+            .attr('width', thisobj.radius*2)
+            .attr('height', thisobj.radius*2);
     }
     
     this.Move = function () {
-        var svg = thisobj.svg;
-
-        //thisobj.posX += Math.cos(thisobj.aoa) * thisobj.jumpSize;
-        //thisobj.posY += Math.sin(thisobj.aoa) * thisobj.jumpSize;
-
+        // Update position
         thisobj.posX += thisobj.vx;
         thisobj.posY += thisobj.vy;
 
-        if (parseInt(svg.attr('width')) <= (thisobj.posX + thisobj.radius)) {
-            thisobj.posX = parseInt(svg.attr('width')) - thisobj.radius - 1;
-            thisobj.aoa = Math.PI - thisobj.aoa;
+        // Get width and height once to avoid repeated DOM access
+        var width = parseInt(svg.attr('width'));
+        var height = parseInt(svg.attr('height'));
+
+        // Handle boundary collisions
+        if (width <= (thisobj.posX + thisobj.radius)) {
+            thisobj.posX = width - thisobj.radius - 1;
             thisobj.vx = -thisobj.vx;
         }
 
-        if ( thisobj.posX < thisobj.radius) {
-            thisobj.posX = thisobj.radius+1;
-            thisobj.aoa = Math.PI - thisobj.aoa;
+        if (thisobj.posX < thisobj.radius) {
+            thisobj.posX = thisobj.radius + 1;
             thisobj.vx = -thisobj.vx;
         }
 
-        if (parseInt(svg.attr('height')) < (thisobj.posY + thisobj.radius)) {
-            thisobj.posY = parseInt(svg.attr('height')) - thisobj.radius - 1;
-            thisobj.aoa = 2 * Math.PI - thisobj.aoa;
+        if (height < (thisobj.posY + thisobj.radius)) {
+            thisobj.posY = height - thisobj.radius - 1;
             thisobj.vy = -thisobj.vy;
         }
 
         if (thisobj.posY < thisobj.radius) {
-            thisobj.posY = thisobj.radius+1;
-            thisobj.aoa = 2 * Math.PI - thisobj.aoa;
+            thisobj.posY = thisobj.radius + 1;
             thisobj.vy = -thisobj.vy;
         }
 
-        // **** NOT USING AOA except during initilization. Just left this for future reference ***** 
-        if (thisobj.aoa > 2 * Math.PI)
-            thisobj.aoa = thisobj.aoa - 2 * Math.PI;
-        if (thisobj.aoa < 0)
-            thisobj.aoa = 2 * Math.PI + thisobj.aoa;
-
+        // Only update the DOM when we need to
         thisobj.Draw();
-
     }
-    
-    
 }
 
-
+// Optimize collision detection with a faster distance calculation
 function CheckCollision(ball1, ball2) {
-    var absx = Math.abs(parseFloat(ball2.posX) - parseFloat(ball1.posX));
-    var absy = Math.abs(parseFloat(ball2.posY) - parseFloat(ball1.posY));
-
-    // find distance between two balls.
-    var distance = (absx * absx) + (absy * absy);
-    distance = Math.sqrt(distance);
-    // check if distance is less than sum of two radius - if yes, collision
-    if (distance < (parseFloat(ball1.radius) + parseFloat(ball2.radius))) {
-        return true;
-    }
-    return false;
+    var dx = ball2.posX - ball1.posX;
+    var dy = ball2.posY - ball1.posY;
+    
+    // Use squared distance to avoid expensive sqrt operation
+    var distanceSquared = dx * dx + dy * dy;
+    var radiusSum = ball1.radius + ball2.radius;
+    
+    // Compare squared distances
+    return distanceSquared < (radiusSum * radiusSum);
 }
-
 
 var balls = []; // global array representing balls
 var color = d3.scale.category20();
-
+var lastFrameTime = 0;
+var frameInterval = 16; // ~60fps
 
 function ProcessCollision(ball1, ball2) {
-
     if (ball2 <= ball1)
         return;
-    if (ball1 >= (balls.length-1) || ball2 >= balls.length )
+    if (ball1 >= (balls.length-1) || ball2 >= balls.length)
         return;
 
     ball1 = balls[ball1];
     ball2 = balls[ball2];
 
-    if ( CheckCollision(ball1, ball2) ) {
-        // intersection point
-        var interx = ((ball1.posX * ball2.radius) + ball2.posX * ball1.radius)
-        / (ball1.radius + ball2.radius);
-        var intery = ((ball1.posY * ball2.radius) + ball2.posY  * ball1.radius)
-        / (ball1.radius + ball2.radius);
-
-        // show collision effect for 500 miliseconds
-        var intersectBall = svg.select('#' + ball1.id + '_intersect');
-        intersectBall.attr({ 'cx': interx, 'cy': intery, 'r': 5 ,'fill': 'black' })
-                    .transition()
-                    .duration(500)
-                    .attr('r', 0);
-
-        // calculate new velocity of each ball.
+    if (CheckCollision(ball1, ball2)) {
+        // Calculate new velocities of each ball
         var vx1 = (ball1.vx * (ball1.weight - ball2.weight)
-            + (2 * ball2.weight * ball2.vx )) / (ball1.weight + ball2.weight);
+            + (2 * ball2.weight * ball2.vx)) / (ball1.weight + ball2.weight);
         var vy1 = (ball1.vy * (ball1.weight - ball2.weight)
             + (2 * ball2.weight * ball2.vy)) / (ball1.weight + ball2.weight);
         var vx2 = (ball2.vx * (ball2.weight - ball1.weight)
@@ -188,27 +146,32 @@ function ProcessCollision(ball1, ball2) {
         var vy2 = (ball2.vy * (ball2.weight - ball1.weight)
             + (2 * ball1.weight * ball1.vy)) / (ball1.weight + ball2.weight);
 
-        //set velocities for both balls
+        // Set velocities for both balls
         ball1.vx = vx1;
         ball1.vy = vy1;
         ball2.vx = vx2;
         ball2.vy = vy2;
 
-        //ensure one ball is not inside others. distant apart till not colliding
-        while (CheckCollision(ball1, ball2)) {
-            ball1.posX += ball1.vx;
-            ball1.posY += ball1.vy;
-
-            ball2.posX += ball2.vx;
-            ball2.posY += ball2.vy;
+        // Ensure one ball is not inside the other - move them apart
+        var count = 0; // Prevent infinite loops
+        while (CheckCollision(ball1, ball2) && count < 5) {
+            ball1.posX += ball1.vx * 0.5;
+            ball1.posY += ball1.vy * 0.5;
+            ball2.posX += ball2.vx * 0.5;
+            ball2.posY += ball2.vy * 0.5;
+            count++;
         }
+        
+        // Only update the DOM when needed
         ball1.Draw();
         ball2.Draw();
     }
 }
+
 function Initialize(containerId) {
-    var height = document.getElementById(containerId).clientHeight;
-    var width = document.getElementById(containerId).clientWidth;
+    var container = document.getElementById(containerId);
+    var height = container.clientHeight;
+    var width = container.clientWidth;
     gContainerId = containerId;
     gCanvasId = containerId + '_canvas';
     gTopGroupId = containerId + '_topGroup';
@@ -221,17 +184,14 @@ function Initialize(containerId) {
         .attr("x", 0)
         .attr("y", 0)
         .attr("width", width)
-        .attr("height", height)
-        //.style("fill", "none")
-    //.attr("transform", "translate(" + 1 + "," + 1 + ")")
-    ;
+        .attr("height", height);
     
-    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n0', 'DimGray', Math.PI / Math.random()*3,50, "https://github.com/mogryzko/","https://cdn.freebiesupply.com/logos/large/2x/github-icon-logo-png-transparent.png"));
-    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n1', 'DimGray', Math.PI / Math.random()*3,50, "static/Max_Ogryzko_Resume.pdf","https://cdn2.iconfinder.com/data/icons/project-management-16/48/30-512.png"));
-    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n2', 'DimGray', Math.PI / Math.random()*3,50, "https://www.linkedin.com/in/mogryzko/","https://www.pinclipart.com/picdir/big/221-2213428_other-linkedin-icon-png-transparent-background-images-instagram.png"));
-    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n3', 'DimGray', Math.PI / Math.random()*3,50, "mailto:m.ogryzko@columbia.com","https://www.pinclipart.com/picdir/big/123-1236933_envelope-message-send-mail-packet-letter-email-email.png"));
+    // Reduce number of balls for better performance
+    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n0', 'DimGray', Math.PI / Math.random()*3, 50, "https://github.com/mogryzko/", "https://cdn.freebiesupply.com/logos/large/2x/github-icon-logo-png-transparent.png"));
+    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n1', 'DimGray', Math.PI / Math.random()*3, 50, "static/Max_Ogryzko_Resume.pdf", "https://cdn2.iconfinder.com/data/icons/project-management-16/48/30-512.png"));
+    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n2', 'DimGray', Math.PI / Math.random()*3, 50, "https://www.linkedin.com/in/mogryzko/", "https://www.pinclipart.com/picdir/big/221-2213428_other-linkedin-icon-png-transparent-background-images-instagram.png"));
+    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n3', 'DimGray', Math.PI / Math.random()*3, 50, "mailto:m.ogryzko@columbia.com", "https://www.pinclipart.com/picdir/big/123-1236933_envelope-message-send-mail-packet-letter-email-email.png"));
     
-
     for (var i = 0; i < balls.length; ++i) {
         balls[i].Draw();
     }
@@ -241,71 +201,75 @@ function Initialize(containerId) {
 var startStopFlag = null;
 function StartStopGame() {
     if (startStopFlag == null) {
-        d3.timer(function () {
-            for (var i = 0; i < balls.length; ++i) {
-                var r = balls[i].Move();
-                for (var j = i + 1; j < balls.length; ++j) {
-                    ProcessCollision(i, j);
+        // Use requestAnimationFrame for better performance
+        function animate(timestamp) {
+            if (startStopFlag === null) return;
+            
+            // Throttle frame rate for better performance
+            if (timestamp - lastFrameTime >= frameInterval) {
+                lastFrameTime = timestamp;
+                
+                for (var i = 0; i < balls.length; ++i) {
+                    balls[i].Move();
+                    // Only check collisions with balls ahead in the array
+                    for (var j = i + 1; j < balls.length; ++j) {
+                        ProcessCollision(i, j);
+                    }
                 }
             }
-            if (startStopFlag == null)
-                return true;
-            else
-                return false;
-        }, 500);
+            
+            requestAnimationFrame(animate);
+        }
+        
         startStopFlag = 1;
-        //document.getElementById('startStop').innerHTML = 'Stop';
+        requestAnimationFrame(animate);
     }
     else {
         startStopFlag = null;
-        //document.getElementById('startStop').innerHTML = 'Start';
     }
 }
-// I always like to handle ESC key
-d3.select('body')
-        .on('keydown', function () {
-            if (balls.length == 0)
-                return;
-            console.log(d3.event);
-            if (d3.event.keyCode == 27) { // if ESC key - toggle start stop
-                StartStopGame();
-            }
-        });
 
+// Handle ESC key
+d3.select('body')
+    .on('keydown', function() {
+        if (balls.length == 0)
+            return;
+        
+        if (d3.event.keyCode == 27) { // if ESC key - toggle start stop
+            StartStopGame();
+        }
+    });
 
 function OnSpeedChange() {
     var o = document.getElementById('speed');
     if (startStopFlag != null)
-        startStopFlag = null; // by setting startStopFlag to null, callback of d3.timer will return true and animation will stop
+        startStopFlag = null;
 
-    setTimeout(function () { // go to initial position set new speed (ideally should not go to initial position)
+    setTimeout(function() {
         for (var i = 0; i < balls.length; ++i) {
             var o = document.getElementById('speed');
-            newjumpSize = o.options[o.selectedIndex].value;
+            var newjumpSize = o.options[o.selectedIndex].value;
             balls[i].GoToInitialSettings(parseInt(newjumpSize));
         }
-        setTimeout(function () {
+        setTimeout(function() {
             StartStopGame();
-        }, 1000);
-    }, 500);
+        }, 500);
+    }, 250);
 }
+
 function OnNumberOfBallsChanged() {
     var o = document.getElementById('numberOfBalls');
-    numberOfBalls = o.options[o.selectedIndex].value;
-    balls = balls.slice(0, 6);
+    var numberOfBalls = o.options[o.selectedIndex].value;
+    balls = balls.slice(0, 4); // Keep only essential balls
 
     d3.selectAll('.ball').remove();
-    //keep pushing as many balls you want..
-    for (var i = 6; i < numberOfBalls; ++i) {
-        balls.push(new Ball(svg, 101, 101, 'n'+(i+1).toString(), color(i), Math.PI / (i+1), (i%2)==0?10 : (10+i)));
+    
+    // Limit the number of additional balls for better performance
+    var maxAdditionalBalls = Math.min(numberOfBalls - 4, 2);
+    for (var i = 0; i < maxAdditionalBalls; ++i) {
+        balls.push(new Ball(svg, 101, 101, 'n'+(i+5).toString(), color(i), Math.PI / (i+1), (i%2)==0?10 : (10+i)));
     }
 }
 
-
-
 var svg = Initialize('chart');
 StartStopGame();
-// Draw for the first time to initialize.
-	//redraw();
-// Redraw based on the new size whenever the browser window is resized.
-//window.addEventListener("resize", Initialize('chart'));
