@@ -7,14 +7,13 @@
 {% endblock %}
 
 {% block content %}
-  <script>function clicked(container) {
-    if (container.style.height == 'auto') {
-      container.style.height = container.parentElement.style.height;
-    } else if (container.children[0].height > container.clientHeight){
-      container.style.height = 'auto';
-      container.style.border = 'none'
-    } 
-  }
+  <script>
+    function clicked(container) {
+      container.classList.toggle('expanded');
+      if (container.classList.contains('expanded')) {
+        container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
   </script>
   <div class="gallery_container">
     <div class="gallery_title" >
