@@ -157,13 +157,16 @@ STATIC_PROJECTS = [
     {
         "title": "Jump Exaggeration App",
         "main_img": {"url": "/media/IMG_5729.gif"},
-        "image2": {"url": "/media/blake_dunk.GIF"},
-        "image3": {"url": "/media/final.gif"},
+        "image2": None,
+        "image3": None,
         "image4": None,
         "slug": "jump-exaggeration-app",
-        "teaser": "Load in a video of a jump and autonomously exaggerate the jump vertical as much as you'd like",
-        "description": "",
-        "date": "2019-10-02 01:30:27"
+        "teaser": "Load in a video of a jump and autonomously exaggerate the jump vertical as much as you'd like, a la <a href='https://www.youtube.com/watch?v=mQ5D2Dh3vrM' target='_blank'>NBA Jam</a>.",
+        "description": "Here's a detailed explanation of this project: ",
+        "date": "2019-10-02 01:30:27",
+        "skills": "Computer Vision, Deep Learning, Python",
+        "tools": "Python, OpenCV, PyTorch",
+        "github": "https://github.com/roop-pal/NBA-Jammifier"
     },
     {
         "title": "Deep Learning Based Wind Speed Simulation",
@@ -173,7 +176,7 @@ STATIC_PROJECTS = [
         "image4": None,
         "slug": "wind-speed-simulation",
         "teaser": "My work as an intern at <a href='https://ui.kpf.com/smarter-city' target='_blank'>KPFui</a> was featured by KPF at the <a href='https://www.nvidia.com/en-us/on-demand/session/gtcsj20-s21493/' target='_blank'>NVIDIA GTC 2020</a> conference.",
-        "description": "I finetuned the <a href='https://github.com/phillipi/pix2pix' target='_blank'>pix2pix</a> GAN on a custom dataset of building facades and created an api on AWS Sagemaker that is then used in a <a href='https://www.grasshopper3d.com/' target='_blank'>Grasshopper</a> plugin. The model returns back an image with a wind speed value at each pixel, coded from red (0 m/s) to green (120m/s).",
+        "description": "I finetuned the <a href='https://github.com/phillipi/pix2pix' target='_blank'>pix2pix</a> GAN on a custom dataset of building facades and created an API on AWS Sagemaker that is then used in a <a href='https://www.grasshopper3d.com/' target='_blank'>Grasshopper</a> plugin. The model returns back an image with a wind speed value at each pixel, coded from red (0 m/s) to green (120m/s).",
         "date": "2019-10-02 01:27:24",
         "skills": "Deep Learning, Computer Vision, AWS",
         "tools": "Python, Pytorch, OpenCV"
@@ -184,7 +187,7 @@ STATIC_PROJECTS = [
         "image2": {"url": "/media/building2_iphone.png"},
         "image3": {"url": "/media/building3_iphone.png"},
         "slug": "building-recognition-app",
-        "teaser": "We leverage GPS, accelerometer, and barometer data to localize the user's location and orientation within a <a href='http://maps.nyc.gov/download/3dmodel/DA_WISE_GML.zip' target='_blank'>3D point cloud</a> of NYC. We then identify buildings in their live camera feed and provide relevant information.",
+        "teaser": "An app that leverages GPS, accelerometer, and barometer data to localize a user's location and orientation within a <a href='http://maps.nyc.gov/download/3dmodel/DA_WISE_GML.zip' target='_blank'>3D point cloud</a> of NYC. Buildings are identified in user's live camera feed and relevant information is provided once the building is identified.",
         "github": "https://github.com/roop-pal/nyc-visual-building-annotator",
         "date": "2019-10-02",
         "skills": "Computer Vision, 3D Reconstruction",
@@ -198,7 +201,10 @@ STATIC_PROJECTS = [
         "image4": None,
         "slug": "basketball-game",
         "teaser": "An attempt to make my favorite NBA players play against me.",
-        "description": "Inspired by a paper titled: \"Bhostgusters: Realtime Interactive Play Sketching with Synthesized NBA Defenses.\" Using tracking data from the 2015-16 NBA season, I created an algorithm that finds when a player I specify is guarding a ball-handler. I then used these instances to train a Long Short Term Memory (LSTM) neural network to imitate the player as a \"ghost\" defender.\r\n\r\nBelow you see two real possessions from the 2015-16 NBA season. The ball handler is the black dot, real-Al Horford is the gold dot, and LSTM-Al Horford is the red dot.",
-        "date": "2019-10-02 01:43:23"
+        "description": "Using tracking data from the <a href='https://github.com/sealneaward/nba-movement-data' target='_blank'>2015-16 NBA season</a>, I created an algorithm that finds when a player I specify is guarding a ball-handler. I then trained an <a href='https://colah.github.io/posts/2015-08-Understanding-LSTMs/' target='_blank'>LSTM</a> to imitate the player as a \"ghost\" defender.\r\n\r\nBelow you see two real possessions from the 2015-16 NBA season. The ball handler is the black dot, the real defenderis the gold dot, and the AI I trained is the red dot.",
+        "date": "2019-10-02 01:43:23",
+        "skills": "Deep Learning, Python",
+        "tools": "PyTorch, Python, NumPy, Pandas",
+        "github": "https://github.com/mogryzko/NBA-Defensive-AI"
     }
 ]

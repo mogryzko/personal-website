@@ -14,16 +14,12 @@
 					<h4 class="project_description">{{ project.teaser|safe }}</h4>
 					<h4 class="project_description">{{ project.description|safe }}</h4>
 					{% if project.slug == "jump-exaggeration-app" %}
-						<h4 class="project_description">
-							<a style="font-family: sans-serif;
-  									  font-size: 16px;
-  									  text-align: left;
-  									  font-weight: normal;
-  									  color: rgba(0,0,0,0.7);
-  									  text-decoration: underline;" href="{% url 'jump_exaggeration_app_more_info' %}">
-								A detailed explaination
-							</a>
-						</h4>
+						<div class="project_description">
+							<video width="100%" controls>
+								<source src="{% static 'jump-data/nba_jam.mp4' %}" type="video/mp4">
+								Your browser does not support the video tag.
+							</video>
+						</div>
 					{% endif %}
 					{% if project.skills %}
 						<h4  class="project_description">Skills: {{ project.skills }}</h4>
@@ -31,7 +27,9 @@
 					{% if project.tools %}
 						<h4  class="project_description">Tools: {{ project.tools }}</h4>
 					{% endif %}
-					<img id="{{ project.slug }}" src="{{ project.main_img.url }}" style="padding: 0 20px;"></img>
+					{% if project.main_img and not project.slug == "jump-exaggeration-app" %}
+						<img id="{{ project.slug }}" src="{{ project.main_img.url }}" style="padding: 0 20px;"></img>
+					{% endif %}
 					{% if project.image2 %}
 						<img src="{{ project.image2.url }}" style="padding: 0 20px;"></img>
 					{% endif %}
