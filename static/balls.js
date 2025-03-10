@@ -189,12 +189,46 @@ function Initialize(containerId) {
         .attr("width", width)
         .attr("height", height);
     
-    // Reduce number of balls for better performance
-    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n0', 'DimGray', Math.PI / Math.random()*3, 50, "https://github.com/mogryzko/", "https://cdn.freebiesupply.com/logos/large/2x/github-icon-logo-png-transparent.png"));
-    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n1', 'DimGray', Math.PI / Math.random()*3, 50, "static/Max_Ogryzko_Resume.pdf", "https://cdn2.iconfinder.com/data/icons/project-management-16/48/30-512.png"));
-    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n2', 'DimGray', Math.PI / Math.random()*3, 50, "https://www.linkedin.com/in/mogryzko/", "https://www.pinclipart.com/picdir/big/221-2213428_other-linkedin-icon-png-transparent-background-images-instagram.png"));
-    balls.push(new Ball(svg, Math.random()*width, Math.random()*height, 'n3', 'DimGray', Math.PI / Math.random()*3, 50, "mailto:m.ogryzko@columbia.com", "https://www.pinclipart.com/picdir/big/123-1236933_envelope-message-send-mail-packet-letter-email-email.png"));
+    // Reduce number of balls for better performance and ensure they don't overlap
+    const positions = [];
+    const radius = 50; // Ball radius
+    const minDistance = radius * 2; // Minimum distance between ball centers
     
+    function getValidPosition(width, height) {
+        let x, y, isValid;
+        do {
+            x = Math.random() * width;
+            y = Math.random() * height;
+            isValid = true;
+            
+            // Check distance from all existing positions
+            for (let pos of positions) {
+                const dx = x - pos.x;
+                const dy = y - pos.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < minDistance) {
+                    isValid = false;
+                    break;
+                }
+            }
+        } while (!isValid);
+        
+        positions.push({x, y});
+        return {x, y};
+    }
+
+    // Create balls with non-overlapping positions
+    const pos1 = getValidPosition(width, height);
+    balls.push(new Ball(svg, pos1.x, pos1.y, 'n0', 'DimGray', Math.PI / Math.random()*3, radius, "https://github.com/mogryzko/", "https://cdn.freebiesupply.com/logos/large/2x/github-icon-logo-png-transparent.png"));
+    
+    const pos2 = getValidPosition(width, height);
+    balls.push(new Ball(svg, pos2.x, pos2.y, 'n1', 'DimGray', Math.PI / Math.random()*3, radius, "static/max-ogryzko-resume.pdf", "https://cdn2.iconfinder.com/data/icons/project-management-16/48/30-512.png"));
+    
+    const pos3 = getValidPosition(width, height);
+    balls.push(new Ball(svg, pos3.x, pos3.y, 'n2', 'DimGray', Math.PI / Math.random()*3, radius, "https://www.linkedin.com/in/mogryzko/", "https://www.pinclipart.com/picdir/big/221-2213428_other-linkedin-icon-png-transparent-background-images-instagram.png"));
+    
+    const pos4 = getValidPosition(width, height);
+    balls.push(new Ball(svg, pos4.x, pos4.y, 'n3', 'DimGray', Math.PI / Math.random()*3, radius, "mailto:m.ogryzko@columbia.com", "https://www.pinclipart.com/picdir/big/123-1236933_envelope-message-send-mail-packet-letter-email-email.png"));
     for (var i = 0; i < balls.length; ++i) {
         balls[i].Draw();
     }
