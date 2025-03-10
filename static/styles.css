@@ -14,8 +14,8 @@
   background: url('/static/background.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover; /* This will make the image cover the full screen */
-  background-position: center; /* This centers the image */
+  background-size: cover;
+  background-position: center;
   content: "";
   opacity: 0.5;
   position: fixed;
@@ -89,9 +89,9 @@
 }
 .gallery_title {
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: normal;
-  color: rgba(0,0,0,1.0);
+  font-family: sans-serif;
+  font-weight: 300;
+  color: rgba(0,0,0,0.8);
   font-size: 24px;
   padding-left: 30px;
   padding-bottom: 10px;
